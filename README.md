@@ -1,3 +1,6 @@
+
+#Note! this moudle is unfinished
+
 Favorite (module for Omeka S)
 ===================================
 
