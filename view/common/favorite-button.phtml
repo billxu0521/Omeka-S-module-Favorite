@@ -1,0 +1,27 @@
+<?php
+/**
+ * @var \Zend\View\Renderer\PhpRenderer $this
+ * @var \Omeka\Api\Representation\SiteRepresentation $site
+ * @var \SearchHistory\Api\Representation\SearchRequestRepresentation $searchRequest
+ * @var string $engine
+ * @var string $query
+ */
+
+if (!$user):
+    return;
+endif;
+
+$plugins = $this->getHelperPluginManager();
+$translate = $this->plugin('translate');
+$url = $this->plugin('url');
+$assetUrl = $this->plugin('assetUrl');
+
+$this->headLink()
+    ->appendStylesheet($assetUrl('css/favorite.css', 'Favorite'));
+$this->headScript()
+    ->appendFile($assetUrl('js/favorite.js', 'Favorite'), 'text/javascript', ['defer' => 'defer']);
+
+?>
+<a class="favorite delete favorite-delete delete-favorite-button <?= $searchRequest ? '' : ' hidden' ?>" id="favorite_del" href="<?= $searchRequest ? $url('site/favorite-id', ['action' => 'delete', 'id' => $searchRequest->id()], true) : '' ?>">刪除</a>
+<a class="favorite add save-filters favorite-button <?= $searchRequest ? 'hidden' : ' ' ?>" id="favorite_add" data-id="<?= $resource_id ?>" href="<?= $url('site/favorite', ['action' => 'add'], true) ?>">加入我的最愛</a>
+
