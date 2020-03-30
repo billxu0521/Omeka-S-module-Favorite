@@ -2,7 +2,7 @@
 namespace Favorite;
 
 return  [
-     'api_adapters' => [
+    'api_adapters' => [
         'invokables' => [
             'favorite_item' => Api\Adapter\FavoriteAdapter::class,
         ],
@@ -24,15 +24,30 @@ return  [
         'invokables' => [
             'linkFavorite' => View\Helper\LinkFavorite::class,
         ],
-       ],
-    
+    ],
     'controllers' => [
         'invokables' => [
             'Favorite\Controller\Site\FavoriteList' => Controller\Site\FavoriteListController::class,
             'Favorite\Controller\Site\GuestBoard' => Controller\Site\GuestBoardController::class,
         ],
     ],
-    
+    'navigation_links' => [
+        'invokables' => [
+            'favorite' => Site\Navigation\Link\Favorite::class,
+        ],
+    ],
+    'navigation' => [
+        'site' => [
+            [
+                'label' => 'Favorite', // @translate
+                'route' => 'site/guest/favorite',
+                'controller' => 'Favorite\Controller\Site\GuestBoard',
+                'action' => 'show',
+                'useRouteMatch' => true,
+                'visible' => false,
+            ],
+        ],
+    ],
     'router' => [
         'routes' => [
             'site' => [
@@ -116,5 +131,6 @@ return  [
             'Favorite',
         ],
     ],
-    
+    'savorite' => [
+    ],
     ];

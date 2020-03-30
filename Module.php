@@ -29,20 +29,24 @@ class Module extends AbstractModule
         parent::onBootstrap($event);
 
         $acl = $this->getServiceLocator()->get('Omeka\Acl');
-
+        if (!$acl->hasRole('guest')) {
+            $acl->addRole('guest');
+        }
         $roles = $acl->getRoles();
         $acl
             ->allow(
                 $roles,
-                [
-                    //Entity\Favorite::class,
+                [   
+                    Entity\Favorite::class,
                     Api\Adapter\FavoriteAdapter::class,
                     'Favorite\Controller\Site\FavoriteList',
                     'Favorite\Controller\Site\GuestBoard',
+                    
                 ]
         );
+        
     }
-
+   
     public function attachListeners(SharedEventManagerInterface $sharedEventManager)
     {
         $sharedEventManager->attach(
@@ -50,6 +54,11 @@ class Module extends AbstractModule
             'view.show.after',
             [$this, 'handleViewShowAfterItem'],
                 +100
+        );
+        $sharedEventManager->attach(
+            \Guest\Controller\Site\GuestController::class,
+            'guest.widgets',
+            [$this, 'handleGuestWidgets']
         );
         
     }
@@ -71,10 +80,10 @@ class Module extends AbstractModule
 
         $widget = [];
         $widget['label'] = $translate('Favorite'); // @translate
-        $widget['content'] = $partial('guest/site/guest/widget/favorite-list');
+        $widget['content'] = $partial('guest/site/guest/widget/favorite');
 
         $widgets = $event->getParam('widgets');
-        $widgets['favorite-list'] = $widget;
+        $widgets['favorite'] = $widget;
         $event->setParam('widgets', $widgets);
     }
 }

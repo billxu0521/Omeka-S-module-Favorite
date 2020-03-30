@@ -71,9 +71,7 @@ class FavoriteRepresentation extends AbstractEntityRepresentation
     public function item()
     {
         $item = $this->resource->getItem();
-        return $item
-            ? $this->getAdapter('item')->getRepresentation($item)
-            : null;
+        return $item;
     }
     
     /**
@@ -103,4 +101,39 @@ class FavoriteRepresentation extends AbstractEntityRepresentation
         return $this->resource->getModified();
     }
 
+
+
+public function siteUrl($siteSlug = null, $canonical = false)
+    {
+        if (!$siteSlug) {
+            $siteSlug = $this->getServiceLocator()->get('Application')
+                ->getMvcEvent()->getRouteMatch()->getParam('site-slug');
+        }
+        $url = $this->getViewHelper('Url');
+        return $url(
+            'site/guest/favorite',
+            [
+                'site-slug' => $siteSlug,
+                'id' => $this->id(),
+            ],
+            ['force_canonical' => $canonical]
+        );
+    }
+
+
+    /**
+     * Check if a module is active.
+     *
+     * @param string $moduleClass
+     * @return bool
+     */
+protected function isModuleActive($moduleClass)
+{
+        $services = $this->getServiceLocator();
+        /** @var \Omeka\Module\Manager $moduleManager */
+        $moduleManager = $services->get('Omeka\ModuleManager');
+        $module = $moduleManager->getModule($moduleClass);
+        return $module
+            && $module->getState() === \Omeka\Module\Manager::STATE_ACTIVE;
+    }
 }

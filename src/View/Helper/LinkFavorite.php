@@ -26,11 +26,19 @@ class LinkFavorite extends AbstractHelper
                 $searchRequest = $view->api()->searchOne('favorite_item',$query)->getContent(); 
             }        
         }
+        $showDelBtn = false;
+        $favoriteId = $searchRequest->item()->getId();
+        if($favoriteId == $resource_id){
+            $showDelBtn = 'true';
+        }else{
+            $showDelBtn = 'false';
+        }
         
         return $view->partial('common/favorite-button', [
             'resource' => $resource,
             'resource_id' => $resource_id,
-            'searchRequest' => $searchRequest,  
+            'searchRequest' => $searchRequest,
+            'showdelbtn' => $showDelBtn,
             'user' => $user,
         ]);
     }

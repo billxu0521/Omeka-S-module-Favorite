@@ -1,0 +1,15 @@
+<?php
+/**
+ * @var \Zend\View\Renderer\PhpRenderer $this
+ */
+
+$translate = $this->plugin('translate');
+$urlHelper = $this->plugin('url');
+?>
+
+<ul>
+    <li>
+        <?php $url = $urlHelper('site/guest/favorite', [], true); ?>
+        <?= $this->hyperlink($translate('Favorite'), $url) ?>
+    </li>
+</ul>

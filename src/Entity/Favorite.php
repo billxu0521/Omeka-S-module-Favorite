@@ -87,7 +87,6 @@ class Favorite extends AbstractEntity
      * @Column(type="datetime")
      */
     protected $created;
-
     /**
      * @var DateTime
      *

@@ -45,14 +45,14 @@ class FavoriteListController extends AbstractActionController
                 'message' => $this->translate('Unable to save.'), // @translate
             ]);
         }
-        $searchRequest = $response->getContent();
+        $favotiteItem = $response->getContent();
         return new JsonModel([
             'status' => 'success',
             'data' => [
                 'item_id' => intval($resource_id),
                 'itemset_id' => $itemset_id,
                 'site_id' => $site_id,
-                'url_delete' => $this->url()->fromRoute('site/favorite-id', ['action' => 'delete', 'id' => $searchRequest->id()], true),
+                'url_delete' => $this->url()->fromRoute('site/favorite-id', ['action' => 'delete', 'id' => $favotiteItem->id()], true),
                 ],
         ]);
     }

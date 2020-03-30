@@ -15,6 +15,7 @@ class FavoriteAdapter extends AbstractEntityAdapter
         'id' => 'id',
         'created' => 'created',
         'item_id' => 'item_id',
+        'item' => 'item',
         'item_set_id' => 'item_set_id',
         'modified' => 'modified',
     ];

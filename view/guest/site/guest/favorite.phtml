@@ -1,0 +1,57 @@
+<?php
+/**
+ * @var \Zend\View\Renderer\PhpRenderer $this
+ * @var \Omeka\Api\Representation\SiteRepresentation $site
+ * @var \SearchHistory\Api\Representation\SearchRequestRepresentation[] $searchRequests
+ */
+
+$plugins = $this->getHelperPluginManager();
+$translate = $plugins->get('translate');
+$hyperlink = $plugins->get('hyperlink');
+$url = $plugins->get('url');
+$assetUrl = $this->plugin('assetUrl');
+
+$this->headLink()
+    ->appendStylesheet($assetUrl('css/favorite.css', 'Favorite'));
+$this->headScript()
+    ->appendFile($assetUrl('js/favorite.js', 'Favorite'), 'text/javascript', ['defer' => 'defer']);
+
+$this->htmlElement('body')->appendAttribute('class', 'favorite browse');
+
+$sortHeadings = [
+    [
+        'label' => $translate('Created'),
+        'value' => 'created',
+    ],
+];
+$headingTerm = $this->siteSetting('browse_heading_property_term');
+
+$showitems=[];
+foreach ($resources as $resource){
+    $heading = $headingTerm ? $resource->value($headingTerm, ['default' => $translate('[Untitled]')]) : $resource->displayTitle();
+    $linktext = $resource->link($heading);
+    $dellink = $hyperlink($translate('Delete'), $url('site/favorite-id', ['action' => 'delete', 'id' => $resource->id()], true), ['class' => 'search-history-delete']);
+    array_push($showitems,[$linktext,$dellink]);
+}
+
+
+
+?>
+
+<?= $this->pageTitle($translate('Favorite'), 2); ?>
+
+<?= $this->searchFilters() ?>
+
+<?php if (count($resources)): ?>
+<h3><?= sprintf($translate('%d favoriteitem:'), count($resources)) ?></h3>
+
+<?php foreach ($showitems as $showitem){
+    print_r($showitem[0].' => '.$showitem[1]); 
+    echo '<br>';
+    
+}?>
+<?php else: ?>
+<p>
+    <?= $translate('No favoriteitem.') ?>
+</p>
+<?php endif; ?>
