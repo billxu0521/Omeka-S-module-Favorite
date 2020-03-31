@@ -10,13 +10,19 @@ that can callback in future.
 
 Installation
 ------------
+Install the module [Guest].
 
+Uncompress files in the module directory and rename module folder `Favorite`.
+Then install it like any other Omeka module and follow the config instructions.
 
+See general end user documentation for [Installing a module].
 
 Usage
 -----
 
-
+A button is added in the bottom of the item(resource) view ,
+so the user can add the item to favorite list. The user can see the favorite item via a
+link in the guest user account(at Favorite link).
 
 Warning
 -------
@@ -30,6 +36,7 @@ your archives regularly so you can roll back if needed.
 Troubleshooting
 ---------------
 
+See online issues on the [module issues] page on GitHub.
 
 
 License
@@ -76,4 +83,4 @@ Copyright
 [FSF]: https://www.fsf.org
 [OSI]: http://opensource.org
 [Fondation Maison de Salins]: https://collections.maison-salins.fr
-[billxu]: https://github.com/billxu0521 "Daniel Berthereau"
+[billxu]: https://github.com/billxu0521 "Billxu"
