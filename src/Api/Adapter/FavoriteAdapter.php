@@ -74,7 +74,7 @@ class FavoriteAdapter extends AbstractEntityAdapter
         $alias = $isOldOmeka ? $this->getEntityClass() : 'omeka_root';
         $expr = $qb->expr();
 
-        if (isset($query['user_id'])) {
+        if (isset($query['user'])) {
             $userAlias = $this->createAlias();
             $qb->innerJoin(
                 $alias . '.user',
@@ -82,11 +82,11 @@ class FavoriteAdapter extends AbstractEntityAdapter
             );
             $qb->andWhere($expr->eq(
                 $userAlias . '.id',
-                $this->createNamedParameter($qb, $query['user_id']))
+                $this->createNamedParameter($qb, $query['user']))
             );
         }
 
-        if (isset($query['site_id'])) {
+        if (isset($query['site'])) {
             $siteAlias = $this->createAlias();
             $qb->innerJoin(
                 $alias . '.site',
@@ -95,27 +95,25 @@ class FavoriteAdapter extends AbstractEntityAdapter
             if ($query['site_id']) {
                 $qb->andWhere($expr->eq(
                     $siteAlias . '.id',
-                    $this->createNamedParameter($qb, $query['site_id']))
+                    $this->createNamedParameter($qb, $query['site']))
                 );
             }   
         }
         
-        if (isset($query['item_id'])) {
+        if (isset($query['item'])) {
             $siteAlias = $this->createAlias();
             $qb->innerJoin(
                 $alias . '.item',
                 $siteAlias
             );
-            if ($query['item_id']) {
+            if ($query['item']) {
                 $qb->andWhere($expr->eq(
                     $siteAlias . '.id',
-                    $this->createNamedParameter($qb, $query['item_id']))
+                    $this->createNamedParameter($qb, $query['item']))
                 );
             }
-            // A "0" means a search in admin board.
-            else {
-                $qb->andWhere($expr->isNull($siteAlias . '.id'));
-            }
+            
         }
+      
     }
 }

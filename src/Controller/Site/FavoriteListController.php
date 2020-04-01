@@ -87,7 +87,7 @@ class FavoriteListController extends AbstractActionController
             // TODO Add acl check for own requests.
             $data = [
                 'id' => $id,
-                'user_id' => $userId,
+                'user' => $userId,
             ];
             $favoritelist = $api->searchOne('favorite_item', $data)->getContent();
             if ($favoritelist) {

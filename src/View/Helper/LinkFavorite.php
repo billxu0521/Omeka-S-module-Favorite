@@ -21,19 +21,28 @@ class LinkFavorite extends AbstractHelper
         $user = $view->identity();
         $searchRequest = null;
         if ($user) {
-            $query = ['user_id' => $user->getId(),'site_id' => $site ? $site->id() : 0,'item_id' => $resource_id];
+           $query = [
+                'id' => 6
+                
+            ];
+            $query = ['user' => $user->getId(),'item' => $resource_id];
             if ($user) {
                 $searchRequest = $view->api()->searchOne('favorite_item',$query)->getContent(); 
             }        
         }
         $showDelBtn = false;
-        $favoriteId = $searchRequest->item()->getId();
-        if($favoriteId == $resource_id){
-            $showDelBtn = 'true';
-        }else{
-            $showDelBtn = 'false';
-        }
         
+        $favoriteId = null;
+       
+        if($searchRequest != null){
+            $favoriteId = $searchRequest->item()->getId();
+            
+            if($favoriteId == $resource_id){
+                $showDelBtn = 'true';
+            }else{
+                $showDelBtn = 'false';
+            }
+        }
         return $view->partial('common/favorite-button', [
             'resource' => $resource,
             'resource_id' => $resource_id,
