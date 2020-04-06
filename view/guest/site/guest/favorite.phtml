@@ -27,12 +27,27 @@ $sortHeadings = [
 $headingTerm = $this->siteSetting('browse_heading_property_term');
 
 $showitems=[];
+/*
 foreach ($resources as $resource){
     $heading = $headingTerm ? $resource->value($headingTerm, ['default' => $translate('[Untitled]')]) : $resource->displayTitle();
     $linktext = $resource->link($heading);
-    $dellink = $hyperlink($translate('Delete'), $url('site/favorite-id', ['action' => 'delete', 'id' => $resource->id()], true), ['class' => 'search-history-delete']);
+    $dellink = $hyperlink($translate('Delete'), $url('site/favorite-id', ['action' => 'delete', 'id' => $resource->id()], true), ['class' => 'favorite-delete']);
     array_push($showitems,[$linktext,$dellink]);
 }
+*/
+foreach ($favoritelist as $favorite) {
+    $id = $favorite->id();
+    $itemid =$favorite->item()->getId();
+
+    $query = ['id' => $itemid, 'site_id' => $site];
+    $resource = $this->api()->read('items',$itemid)->getContent();
+    
+    $heading = $headingTerm ? $resource->value($headingTerm, ['default' => $translate('[Untitled]')]) : $resource->displayTitle();
+    $linktext = $resource->link($heading);
+    $dellink = $hyperlink($translate('Delete'), $url('site/favorite-id', ['action' => 'delete', 'id' => $id], true), ['id' => 'favorite_del','class' => 'delete-favorite-button']);
+    array_push($showitems,[$linktext,$dellink]);
+}
+
 
 ?>
 
@@ -40,11 +55,11 @@ foreach ($resources as $resource){
 
 <?= $this->searchFilters() ?>
 
-<?php if (count($resources)): ?>
-<h3><?= sprintf($translate('%d favoriteitem:'), count($resources)) ?></h3>
+<?php if (count($favoritelist)): ?>
+<h3><?= sprintf($translate('%d favoriteitem:'), count($favoritelist)) ?></h3>
 
 <?php foreach ($showitems as $showitem){
-    print_r($showitem[0].' => '.$showitem[1]); 
+    print_r($showitem[0].'     '.$showitem[1]); 
     echo '<br>';
     
 }?>

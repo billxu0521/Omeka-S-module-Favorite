@@ -23,6 +23,6 @@ $this->headScript()
     ->appendFile($assetUrl('js/favorite.js', 'Favorite'), 'text/javascript', ['defer' => 'defer']);
 
 ?>
-<a class="favorite delete favorite-delete delete-favorite-button <?= $showdelbtn == 'true' ? '' : ' hidden' ?>" id="favorite_del" href="<?= $searchRequest ? $url('site/favorite-id', ['action' => 'delete', 'id' => $searchRequest->id()], true) : '' ?>"><?= sprintf($translate('Delete')) ?></a>
+<a class="favorite delete favorite-delete delete-favorite-button <?= $showdelbtn == 'true' ? '' : ' hidden' ?>" id="favorite_del" href="<?= $searchRequest ? $url('site/favorite-id', ['action' => 'delete', 'id' => $searchRequest->id()], true) : '' ?>"><?= sprintf($translate('Delete Favorite')) ?></a>
 <a class="favorite add save-filters favorite-button <?= $showdelbtn == 'true' ? 'hidden' : ' ' ?>" id="favorite_add" data-id="<?= $resource_id ?>" href="<?= $url('site/favorite', ['action' => 'add'], true) ?>"><?= sprintf($translate('Save My Favorite')) ?></a>
 

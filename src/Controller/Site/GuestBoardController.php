@@ -45,6 +45,7 @@ class GuestBoardController extends AbstractActionController
         return $view
             ->setTemplate('guest/site/guest/favorite')
             ->setVariable('site', $site)
-            ->setVariable('resources', $favoriteitem);
+            ->setVariable('resources', $favoriteitem)
+            ->setVariable('favoritelist', $favoritelist);
     }
 }
