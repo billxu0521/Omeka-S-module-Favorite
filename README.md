@@ -1,5 +1,5 @@
 
-# Note! this moudle is unfinished
+# Note! this moudle project is closed
 
 Favorite (module for Omeka S)
 ===================================

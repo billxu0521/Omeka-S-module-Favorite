@@ -4,17 +4,17 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 # Translators:
-# Hong Zhang <zhangh@unlv.nevada.edu>, 2018
+# Billxu <billxu0521@gmail.com>, 2018
 #
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-08-13 15:51-0400\n"
-"PO-Revision-Date: 2017-06-13 18:56+0000\n"
-"Last-Translator: Hong Zhang <zhangh@unlv.nevada.edu>, 2018\n"
-"Language-Team: Chinese (China) (https://www.transifex.com/omeka/teams/14184/zh_CN/)\n"
+"POT-Creation-Date: 2020-03-31 13:56+0000\n"
+"PO-Revision-Date: 2020-03-31 13:56+0000\n"
+"Last-Translator: Billxu <billxu0521@gamil.com>, 2020\n"
+"Language-Team: Chinese (Taiwan)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -23,15 +23,20 @@ msgstr ""
 "X-Language: zh_TW\n"
 "X-Source-Language: C\n"
 
-#: Module.php:82
-#: /view/guest/site/guest/favorite.phtml:41
 msgid "Favorite"
 msgstr "收藏"
 
-#: /view/guest/site/guest/favorite.phtml:46
 msgid "%d favoriteitem:"
 msgstr "%d 個收藏"
 
-#: /view/guest/site/guest/favorite.phtml:55
 msgid "No favoriteitem."
 msgstr "無收藏項目"
+
+msgid "Delete"
+msgstr "刪除"
+
+msgid "Save My Favorite"
+msgstr "加入至我的收藏"
+
+msgid "Delete Favorite"
+msgstr "刪除此收藏"
